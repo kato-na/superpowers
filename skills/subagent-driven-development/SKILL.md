@@ -61,6 +61,9 @@ digraph process {
     "Read plan, extract all tasks with full text, note context, create TodoWrite" [shape=box];
     "More tasks remain?" [shape=diamond];
     "Dispatch final code reviewer subagent for entire implementation" [shape=box];
+    "Use superpowers:browser-e2e-testing" [shape=box style=filled fillcolor=lightyellow];
+    "Browser issues found?" [shape=diamond];
+    "Fix browser issues" [shape=box];
     "Use superpowers:finishing-a-development-branch" [shape=box style=filled fillcolor=lightgreen];
 
     "Read plan, extract all tasks with full text, note context, create TodoWrite" -> "Dispatch implementer subagent (./implementer-prompt.md)";
@@ -80,7 +83,11 @@ digraph process {
     "Mark task complete in TodoWrite" -> "More tasks remain?";
     "More tasks remain?" -> "Dispatch implementer subagent (./implementer-prompt.md)" [label="yes"];
     "More tasks remain?" -> "Dispatch final code reviewer subagent for entire implementation" [label="no"];
-    "Dispatch final code reviewer subagent for entire implementation" -> "Use superpowers:finishing-a-development-branch";
+    "Dispatch final code reviewer subagent for entire implementation" -> "Use superpowers:browser-e2e-testing";
+    "Use superpowers:browser-e2e-testing" -> "Browser issues found?";
+    "Browser issues found?" -> "Fix browser issues" [label="yes"];
+    "Fix browser issues" -> "Use superpowers:browser-e2e-testing" [label="re-test"];
+    "Browser issues found?" -> "Use superpowers:finishing-a-development-branch" [label="no"];
 }
 ```
 
@@ -196,8 +203,21 @@ Code reviewer: ✅ Approved
 [Dispatch final code-reviewer]
 Final reviewer: All requirements met, ready to merge
 
+[Use superpowers:browser-e2e-testing]
+Browser e2e test: ✅ 5/5 items passed, evidence captured
+
 Done!
 ```
+
+## Browser Testing (after final code review)
+
+**REQUIRED SUB-SKILL:** Use superpowers:browser-e2e-testing
+
+After the final code review passes and before finishing the branch, invoke the browser-e2e-testing skill to verify the implementation in a real browser.
+
+**When to run:** Always for tasks that produce visible UI changes. Skip only for pure backend/utility work with no UI impact.
+
+**If Chrome not connected:** Report that browser testing was skipped and why. Do not silently skip.
 
 ## Advantages
 
@@ -268,6 +288,7 @@ Done!
 - **superpowers:using-git-worktrees** - REQUIRED: Set up isolated workspace before starting
 - **superpowers:writing-plans** - Creates the plan this skill executes
 - **superpowers:requesting-code-review** - Code review template for reviewer subagents
+- **superpowers:browser-e2e-testing** - Browser verification before finishing branch
 - **superpowers:finishing-a-development-branch** - Complete development after all tasks
 
 **Subagents should use:**
