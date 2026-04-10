@@ -28,7 +28,7 @@ The skill is invoked by `subagent-driven-development` and `executing-plans` at t
 Before testing, verify:
 
 1. **Chrome is connected** — call `tabs_context_mcp`. If it errors, stop and tell the user to connect Chrome (`claude --chrome` or `/chrome`).
-2. **App is reachable** — navigate to the app URL. If the page doesn't load, stop and tell the user to start the dev server.
+2. **App is reachable** — navigate to the app URL (from the spec, plan, or an open Chrome tab). If the page doesn't load, stop and tell the user to start the dev server.
 
 If either check fails, the skill stops with a clear message. No silent skipping.
 
