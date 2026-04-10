@@ -29,9 +29,17 @@ For each task:
 3. Run verifications as specified
 4. Mark as completed
 
-### Step 3: Complete Development
+### Step 3: Browser Testing
 
-After all tasks complete and verified:
+**REQUIRED SUB-SKILL:** Use superpowers:browser-e2e-testing
+
+After all tasks complete, invoke the browser-e2e-testing skill to verify UI changes in a real browser.
+
+Skip only for pure backend/utility work with zero UI impact.
+
+### Step 4: Complete Development
+
+After all tasks complete, verified, and browser tested:
 - Announce: "I'm using the finishing-a-development-branch skill to complete this work."
 - **REQUIRED SUB-SKILL:** Use superpowers:finishing-a-development-branch
 - Follow that skill to verify tests, present options, execute choice
@@ -67,4 +75,5 @@ After all tasks complete and verified:
 **Required workflow skills:**
 - **superpowers:using-git-worktrees** - REQUIRED: Set up isolated workspace before starting
 - **superpowers:writing-plans** - Creates the plan this skill executes
+- **superpowers:browser-e2e-testing** - Browser verification before finishing branch
 - **superpowers:finishing-a-development-branch** - Complete development after all tasks
