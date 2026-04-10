@@ -47,6 +47,7 @@ Skip any step = lying, not verifying
 | Bug fixed | Test original symptom: passes | Code changed, assumed fixed |
 | Regression test works | Red-green cycle verified | Test passes once |
 | Agent completed | VCS diff shows changes | Agent reports "success" |
+| UI works | **REQUIRED SUB-SKILL:** superpowers:browser-e2e-testing | "Code looks correct", no browser evidence |
 | Requirements met | Line-by-line checklist | Tests passing |
 
 ## Red Flags - STOP
@@ -104,6 +105,14 @@ Skip any step = lying, not verifying
 ✅ Agent reports success → Check VCS diff → Verify changes → Report actual state
 ❌ Trust agent report
 ```
+
+**Browser (UI changes):**
+```
+✅ Use superpowers:browser-e2e-testing → checklist + evidence → "UI verified"
+❌ "Code looks correct" / "Should render properly"
+```
+**REQUIRED SUB-SKILL:** Use superpowers:browser-e2e-testing for full browser verification.
+Skip only for pure backend/utility work with zero UI impact.
 
 ## Why This Matters
 
