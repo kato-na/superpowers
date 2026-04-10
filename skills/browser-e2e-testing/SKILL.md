@@ -1,6 +1,6 @@
 ---
 name: browser-e2e-testing
-description: Use when implementation is complete and ready for final browser verification — after code review passes, before finishing the development branch; applies to web app projects with UI that can be tested in Chrome
+description: Use when implementation is complete and ready for final browser verification - after code review passes, before finishing the development branch; applies to web app projects with UI that can be tested in Chrome
 ---
 
 # Browser E2E Testing
@@ -117,7 +117,7 @@ Evidence: e2e-test-run-1.gif, screenshot-1.png, ...
 Console errors: None (after fixes)
 ```
 
-## Red Flags — STOP
+## Red Flags - STOP
 
 | Thought | Reality |
 |---------|---------|
