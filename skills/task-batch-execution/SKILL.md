@@ -168,7 +168,7 @@ Every task — regardless of size — gets the same core cycle: **understand →
 
 3. **Implement the fix** — Make the minimal correct change. Don't over-engineer, but don't cut corners.
 
-4. **Verify** — Run the test suite. For UI changes, verify in the browser. For API issues, check the actual response. **Do not move to the next task until the current fix is verified.**
+4. **Verify** — Run the test suite. **For UI changes, you MUST verify in the browser using superpowers:browser-e2e-testing — open the page, reproduce the original symptom to confirm you're testing the right thing, apply the fix, confirm the symptom is gone. Screenshot evidence required. "Looks right from reading the code" is not verification.** For API issues, check the actual response. **Do not move to the next task until the current fix is browser-verified.**
 
 5. **Review** — For Small tasks: self-review the diff for unintended changes. For Medium/Large tasks: dispatch a code quality reviewer subagent to check the fix.
 

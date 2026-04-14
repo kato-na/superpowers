@@ -154,12 +154,16 @@ Require plan approval before any teammate makes changes.
 **Key instructions for each worker:**
 - Read the codebase brief first
 - Work through tasks in order (small → large)
-- For each task: understand → test → fix → verify → commit
+- For each task: understand → test → fix → **browser-verify** → commit
+- **Browser-verify every UI-facing fix before committing.** Use superpowers:browser-e2e-testing to open the affected page and confirm the bug symptom is gone and the expected behavior works. Screenshots as evidence. No "looks right from reading the code" — actual browser interaction.
 - Mark tasks complete via TaskUpdate when done
 - If blocked, message the coordinator with specifics
 - Do NOT edit files outside your owned area
+- Do NOT mark a task complete if browser verification was skipped
 
 **Plan approval is critical.** Each worker should present their understanding and approach before implementing. This catches misunderstandings before they become wrong code.
+
+**Browser verification is non-negotiable for UI fixes.** A "fix" that compiles and passes unit tests but breaks the actual user interaction is not a fix. Workers must open the browser, reproduce the original bug to confirm the symptom, apply the fix, and confirm the symptom is gone. Screenshot evidence required.
 
 ## Step 5: Coordinator Responsibilities
 
