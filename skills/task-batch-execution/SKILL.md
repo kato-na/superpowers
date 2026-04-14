@@ -112,13 +112,49 @@ The reconnaissance should produce:
 
 ## Phase 3: Choose Execution Strategy
 
-After reconnaissance, choose how to execute based on task grouping:
+<HARD-GATE>
+Before executing ANY task, you MUST explicitly evaluate the grouping criterion and announce your choice. Do NOT default to sequential execution — that is the failure mode this skill exists to prevent.
+</HARD-GATE>
 
-**If tasks group into 2+ independent domains with 2+ tasks each:**
-**SUB-SKILL:** Use superpowers:agent-team-execution — spawn persistent workers per domain. Workers build context across related tasks and work in parallel. Best for migration batches, multi-component bug lists.
+### Step 3a: Evaluate Grouping (REQUIRED)
 
-**Otherwise (single domain, or 1 task per domain):**
-Execute sequentially in the current session using the process below. Group tasks by domain so you build context within each area before moving to the next.
+Count the domains from your triage table. A "domain" is a distinct component/subsystem area where 2+ tasks share files or concepts.
+
+Answer these questions out loud to the user:
+
+1. **How many domains have 2+ tasks?** (count them from the triage table)
+2. **Are the domains file-independent?** (no shared files between domains)
+3. **Is Agent Teams enabled?** (run `echo $CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` — must be "1")
+
+### Step 3b: Declare Execution Strategy (REQUIRED)
+
+Based on your evaluation, state ONE of these three strings verbatim:
+
+**Option A — Agent Teams:**
+> "2+ domains have 2+ tasks each and are file-independent. Invoking superpowers:agent-team-execution."
+
+Then **INVOKE superpowers:agent-team-execution**. Do NOT proceed to Sequential Execution below.
+
+**Option B — Sequential (single domain):**
+> "Only 1 domain has 2+ tasks. Executing sequentially in the current session."
+
+Then proceed to Sequential Execution below.
+
+**Option C — Sequential (fallback):**
+> "Agent Teams is not enabled (CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS not set). Falling back to domain-grouped sequential execution."
+
+Then proceed to Sequential Execution below.
+
+**You MUST pick exactly one.** If you find yourself writing "I'll just execute sequentially" without declaring one of these three options, STOP — you're skipping the required evaluation.
+
+### Red Flags at Phase 3
+
+| Thought | Reality |
+|---------|---------|
+| "Sequential is simpler, let me just do that" | The whole point is to detect when agent teams would help. Evaluate the criterion. |
+| "I'll figure out which path as I go" | Declare upfront. Mid-execution pivots waste context. |
+| "The tasks are independent enough for sequential" | If 2+ domains have 2+ tasks AND the flag is set, agent teams wins. Don't rationalize. |
+| "Agent teams is too heavy for this" | You haven't tested it yet. Let the skill decide — it has its own fallback logic. |
 
 ## Sequential Execution
 
