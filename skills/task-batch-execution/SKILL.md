@@ -108,7 +108,19 @@ The reconnaissance should produce:
 
 **Invest time here.** The difference between a correct fix and a wrong fix is almost always understanding. Read the actual code, trace the data flows, understand cause and effect.
 
-## Phase 3: Execute Each Task with Verification
+**STOP if reconnaissance finds nothing:** If you cannot find files relevant to the tasks (components, controllers, modules referenced in the bug descriptions don't exist in this codebase), STOP and tell the user. The most likely cause is running in the wrong directory. Do NOT proceed to implementation with no matching code — you will hallucinate fixes.
+
+## Phase 3: Choose Execution Strategy
+
+After reconnaissance, choose how to execute based on task grouping:
+
+**If tasks group into 2+ independent domains with 2+ tasks each:**
+**SUB-SKILL:** Use superpowers:agent-team-execution — spawn persistent workers per domain. Workers build context across related tasks and work in parallel. Best for migration batches, multi-component bug lists.
+
+**Otherwise (single domain, or 1 task per domain):**
+Execute sequentially in the current session using the process below. Group tasks by domain so you build context within each area before moving to the next.
+
+## Sequential Execution
 
 Every task — regardless of size — gets the same core cycle: **understand → fix → verify → review**.
 
