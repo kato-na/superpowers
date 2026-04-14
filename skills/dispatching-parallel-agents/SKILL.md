@@ -36,6 +36,8 @@ digraph when_to_use {
 **Use when:**
 - 3+ test files failing with different root causes
 - Multiple subsystems broken independently
+- Pre-triaged batch of independent bug fixes (from task-batch-execution)
+- Independent implementation tasks from a plan (from subagent-driven-development)
 - Each problem can be understood without context from others
 - No shared state between investigations
 

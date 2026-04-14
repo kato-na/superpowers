@@ -1,0 +1,1 @@
+I want to build a real-time collaborative whiteboard app. Users should be able to draw, add sticky notes, and see each other's cursors. Think Figma meets Miro but simpler. What do you think?

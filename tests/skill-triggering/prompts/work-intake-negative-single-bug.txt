@@ -1,0 +1,1 @@
+The login button is broken. When I click it, nothing happens. No errors in the console. It was working yesterday before the latest deploy.

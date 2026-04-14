@@ -1,0 +1,9 @@
+I have a list of 5 issues from QA that need to be resolved before our next release:
+
+1. Login page - "Remember me" checkbox state isn't persisted after page refresh
+2. Dashboard - Chart tooltip shows wrong date format (MM/DD vs DD/MM based on locale)
+3. Settings page - Dark mode toggle doesn't apply to the sidebar until page reload
+4. User profile - Avatar upload accepts files over 5MB but the API rejects them with no error shown
+5. Search - Results pagination resets to page 1 when changing sort order
+
+These are all independent bugs in different areas. Fix them.

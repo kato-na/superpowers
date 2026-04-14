@@ -49,6 +49,8 @@ Skills use Claude Code tool names. Non-CC platforms: see `references/copilot-too
 digraph skill_flow {
     "User message received" [shape=doublecircle];
     "About to EnterPlanMode?" [shape=doublecircle];
+    "Multiple pre-defined tasks?" [shape=diamond];
+    "Invoke work-intake skill" [shape=box];
     "Already brainstormed?" [shape=diamond];
     "Invoke brainstorming skill" [shape=box];
     "Might any skill apply?" [shape=diamond];
@@ -59,10 +61,13 @@ digraph skill_flow {
     "Follow skill exactly" [shape=box];
     "Respond (including clarifications)" [shape=doublecircle];
 
-    "About to EnterPlanMode?" -> "Already brainstormed?";
+    "About to EnterPlanMode?" -> "Multiple pre-defined tasks?";
+    "Multiple pre-defined tasks?" -> "Invoke work-intake skill" [label="yes — bug list, QA report, migration tasks"];
+    "Multiple pre-defined tasks?" -> "Already brainstormed?" [label="no"];
     "Already brainstormed?" -> "Invoke brainstorming skill" [label="no"];
     "Already brainstormed?" -> "Might any skill apply?" [label="yes"];
     "Invoke brainstorming skill" -> "Might any skill apply?";
+    "Invoke work-intake skill" -> "Might any skill apply?";
 
     "User message received" -> "Might any skill apply?";
     "Might any skill apply?" -> "Invoke Skill tool" [label="yes, even 1%"];
@@ -98,9 +103,11 @@ These thoughts mean STOP—you're rationalizing:
 
 When multiple skills could apply, use this order:
 
-1. **Process skills first** (brainstorming, debugging) - these determine HOW to approach the task
-2. **Implementation skills second** (frontend-design, mcp-builder) - these guide execution
+1. **Intake routing first** (work-intake) - determines WHICH workflow to use based on input shape
+2. **Process skills second** (brainstorming, debugging, task-batch-execution) - these determine HOW to approach the task
+3. **Implementation skills third** (frontend-design, mcp-builder) - these guide execution
 
+"Here are 7 bugs to fix" → work-intake first (routes to task-batch-execution).
 "Let's build X" → brainstorming first, then implementation skills.
 "Fix this bug" → debugging first, then domain-specific skills.
 

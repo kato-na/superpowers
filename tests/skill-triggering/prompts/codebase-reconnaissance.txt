@@ -1,0 +1,3 @@
+I just joined this team and I'm not familiar with this codebase at all. There's a bug where the notification badge count shows stale data after marking notifications as read. The count updates on page refresh but not in real-time.
+
+Can you investigate and fix this? I don't know where the notification logic lives or how state management works in this project.

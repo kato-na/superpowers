@@ -1,0 +1,11 @@
+Here are the outstanding bugs from our React migration that need fixing:
+
+1. Index filter - when filtering by Investment sale type, it shows both Investment and Occupational disposals plus To Let disposals. Should only show Investment.
+2. Details Drawer - Tenancy Details section not pulling data from Sale Disposal. Need to check BE data.
+3. Details Drawer - Joint agents dropdown doesn't update the disposal when selecting a listing.
+4. Match acquisitions drawer - Matched acquisitions aren't marked as matched and can be selected again.
+5. Match acquisitions drawer - Filter defaults to "For Sale Tenure" instead of the disposal type.
+6. Match acquisitions drawer - capitalize the "selected" button text.
+7. Grid view - pagination element missing from the bottom of the grid.
+
+Can you work through these?
