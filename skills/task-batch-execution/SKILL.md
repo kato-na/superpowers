@@ -91,24 +91,21 @@ Present the triage table even when all tasks fall in the same size. The table co
 
 Wait for user approval before proceeding.
 
-## Phase 2: Deep Codebase Reconnaissance
+## Phase 2: Lightweight Codebase Orientation
 
-**SUB-SKILL:** Use superpowers:codebase-reconnaissance
+**SUB-SKILL:** Use superpowers:codebase-reconnaissance (Steps 1-2 only: structural scan + pattern detection)
 
-If you already have session context from prior work in this codebase, abbreviate to mapping tasks to known files (Steps 3 and 4 only). The brief artifact is still required.
+Build a lightweight orientation brief that gives everyone the lay of the land — project structure, tech stack, state management pattern, how to run tests. This is a 2-minute scan, NOT deep investigation. The brief is a starting point that workers will build on, not a complete analysis.
 
-Build **deep** understanding of the codebase scoped to the batch. Do this ONCE for all tasks, not per-task. The reconnaissance output becomes shared context for all subsequent work.
-
-The reconnaissance should produce:
+The orientation brief should produce:
 - Project structure and key technologies
-- State management pattern and data flow
+- State management pattern
 - How to run tests and verify changes
 - Relevant file paths mapped to each task from the triage table
-- **For each task:** How the relevant code currently works and what the likely root cause is
 
-**Invest time here.** The difference between a correct fix and a wrong fix is almost always understanding. Read the actual code, trace the data flows, understand cause and effect.
+**Deep per-task investigation happens in the workers, not here.** Workers reading the actual code builds firsthand understanding. A centralized brief about code is secondhand understanding — it's lossy, and if the coordinator gets a root cause wrong, workers inherit the wrong hypothesis. Let workers form their own hypotheses from the code.
 
-**STOP if reconnaissance finds nothing:** If you cannot find files relevant to the tasks (components, controllers, modules referenced in the bug descriptions don't exist in this codebase), STOP and tell the user. The most likely cause is running in the wrong directory. Do NOT proceed to implementation with no matching code — you will hallucinate fixes.
+**STOP if orientation finds nothing:** If you cannot find files relevant to the tasks (components, controllers, modules referenced in the bug descriptions don't exist in this codebase), STOP and tell the user. The most likely cause is running in the wrong directory. Do NOT proceed with no matching code.
 
 ## Phase 3: Choose Execution Strategy
 

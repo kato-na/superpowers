@@ -115,15 +115,13 @@ Group tasks within a domain by size (small first) so workers build familiarity b
 
 Set dependencies if any exist (e.g., if bug #5 and #1 share filter code, the second should depend on the first).
 
-## Step 3: Share Reconnaissance Brief
+## Step 3: Share Orientation Brief
 
-The codebase brief from task-batch-execution Phase 2 becomes shared context for all workers. Write it to a file the workers can reference:
-
-Save the brief to `docs/superpowers/plans/codebase-brief.md` (or the project's preferred location). Each worker prompt should reference this file.
+The lightweight orientation brief from task-batch-execution Phase 2 gives workers the project structure, tech stack, and file paths. Save it to `docs/superpowers/plans/codebase-brief.md` (or the project's preferred location). This is a starting point — workers will do their own deep investigation.
 
 ## Step 4: Spawn Workers
 
-For each domain, spawn a persistent worker teammate:
+For each domain, spawn a persistent worker teammate. Each worker is responsible for **deep investigation** of their own domain — reading the actual code, tracing data flows, forming root cause hypotheses from firsthand understanding.
 
 ```
 Create an agent team to fix these bugs in parallel.
@@ -131,22 +129,28 @@ Create an agent team to fix these bugs in parallel.
 Spawn 3 teammates:
 
 1. "match-drawer" — Fix bugs #4, #5, #6 in the Match Acquisitions Drawer.
-   Read docs/superpowers/plans/codebase-brief.md for codebase context.
+   Read docs/superpowers/plans/codebase-brief.md for project orientation.
    Own files: ui/.../match-disposals-drawer/**
+   FIRST: Read all files in your owned area. Trace the data flow for each bug.
+   Form your own root cause hypothesis from the actual code before fixing anything.
    Start with #6 (smallest), then #5, then #4.
-   For each bug: understand the code, write a failing test, fix, verify, commit.
+   For each bug: deep-read → hypothesis → test → fix → browser-verify → commit.
 
 2. "details-drawer" — Fix bugs #2, #3 in the Details Drawer.
-   Read docs/superpowers/plans/codebase-brief.md for codebase context.
+   Read docs/superpowers/plans/codebase-brief.md for project orientation.
    Own files: ui/.../society-disposal-summary/**, app/...DisposalResource.php
-   Bug #2 requires backend changes. Bug #3 may need API response changes.
-   For each bug: understand the code, write a failing test, fix, verify, commit.
+   FIRST: Read all files in your owned area. Trace the data flow for each bug.
+   Bug #2 requires backend investigation — read the API resource and transformer.
+   Bug #3 may need API response changes — check what data the Angular version returns.
+   For each bug: deep-read → hypothesis → test → fix → browser-verify → commit.
 
 3. "index-grid" — Fix bugs #1, #7 on the Index page.
-   Read docs/superpowers/plans/codebase-brief.md for codebase context.
+   Read docs/superpowers/plans/codebase-brief.md for project orientation.
    Own files: ui/.../society-disposals-list/**, app/...DisposalFilter.php
-   Bug #1 requires full-stack investigation (BE filter + FE mapping).
-   For each bug: understand the code, write a failing test, fix, verify, commit.
+   FIRST: Read all files in your owned area. Trace the data flow for each bug.
+   Bug #1 requires full-stack investigation — read the BE filter AND FE mapping.
+   Compare with Angular's filter behavior for parity.
+   For each bug: deep-read → hypothesis → test → fix → browser-verify → commit.
 
 Require plan approval before any teammate makes changes.
 ```
